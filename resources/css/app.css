@@ -9,3 +9,15 @@
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
+/* Flip 3D */
+.perspective {
+    perspective: 1000px;
+}
+
+.rotate-y-180 {
+    transform: rotateY(180deg);
+}
+
+.backface-hidden {
+    backface-visibility: hidden;
+}

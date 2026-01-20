@@ -20,6 +20,6 @@ class ControladorController extends Controller
             ]
             ];
 
-        return view('ejemplo_mvc', ['nombre_titulo' => $datos, 'datos_modelo' => $datos_modelo]);
+        return view('bulo8M', ['nombre_titulo' => $datos, 'datos_modelo' => $datos_modelo]);
     }
 }
