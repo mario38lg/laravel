@@ -36,6 +36,7 @@ class BuloController extends Controller
             'textobulo' => $validated['textobulo'],
             'texto_desmentido' => $validated['texto_desmentido'],
             'imagen' => $validated['imagen'] ?? null,
+            'user_id' => auth()->id(),
         ]);
 
         return redirect('/');
@@ -46,6 +47,11 @@ class BuloController extends Controller
      */
     public function edit(Bulo $bulo)
     {
+        // Verificar que el usuario sea el propietario
+        if ($bulo->user_id !== auth()->id()) {
+            abort(403, 'No tienes permiso para editar este bulo');
+        }
+
         return view('bulos.edit', compact('bulo'));
     }
 
@@ -54,6 +60,11 @@ class BuloController extends Controller
      */
     public function update(Request $request, Bulo $bulo)
 {
+    // Verificar que el usuario sea el propietario
+    if ($bulo->user_id !== auth()->id()) {
+        abort(403, 'No tienes permiso para actualizar este bulo');
+    }
+
     $validated = $request->validate([
         'textobulo' => 'required|string|max:255',
         'texto_desmentido' => 'required|string|max:255',
@@ -79,6 +90,11 @@ class BuloController extends Controller
      */
     public function destroy(Bulo $bulo)
     {
+        // Verificar que el usuario sea el propietario
+        if ($bulo->user_id !== auth()->id()) {
+            abort(403, 'No tienes permiso para eliminar este bulo');
+        }
+
         $bulo->delete();
 
         return redirect('/')->with('success', 'El bulo ha sido eliminado');

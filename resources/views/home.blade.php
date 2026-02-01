@@ -8,9 +8,7 @@
             <div class="flex justify-end mb-4 px-4">
                 <form method="POST" action="/logout">
                     @csrf
-                    <button type="submit" class="btn btn-ghost btn-sm hover:bg-red-100 text-red-600">
-                        Cerrar sesión
-                    </button>
+                    
                 </form>
             </div>
         @endauth

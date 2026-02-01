@@ -40,30 +40,35 @@
             >
                 Ver desmentido
             </button>
-            <div class="mt-4 flex justify-between">
-    {{-- EDITAR --}}
-    <a
-        href="{{ url('/bulos/' . $bulo->id . '/edit') }}"
-        class="btn btn-sm btn-outline btn-primary"
-    >
-        Editar
-    </a>
 
-    {{-- ELIMINAR --}}
-    <form
-        method="POST"
-        action="{{ url('/bulos/' . $bulo->id) }}"
-        onsubmit="return confirm('¿Seguro que quieres eliminar este bulo?')"
-    >
-        @csrf
-        @method('DELETE')
+            {{-- BOTONES DE EDITAR/ELIMINAR (SOLO PARA EL PROPIETARIO) --}}
+            @auth
+                @if($bulo->user_id === auth()->id())
+                    <div class="mt-4 flex justify-between">
+                        {{-- EDITAR --}}
+                        <a
+                            href="{{ url('/bulos/' . $bulo->id . '/edit') }}"
+                            class="btn btn-sm btn-outline btn-primary"
+                        >
+                            Editar
+                        </a>
 
-        <button type="submit" class="btn btn-sm btn-outline btn-error">
-            Eliminar
-        </button>
-    </form>
-</div>
+                        {{-- ELIMINAR --}}
+                        <form
+                            method="POST"
+                            action="{{ url('/bulos/' . $bulo->id) }}"
+                            onsubmit="return confirm('¿Seguro que quieres eliminar este bulo?')"
+                        >
+                            @csrf
+                            @method('DELETE')
 
+                            <button type="submit" class="btn btn-sm btn-outline btn-error">
+                                Eliminar
+                            </button>
+                        </form>
+                    </div>
+                @endif
+            @endauth
         </div>
 
         {{-- BACK --}}
